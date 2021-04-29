@@ -158,3 +158,4 @@ you get the first 10 rows of the medals-winners dataset.
 
 ## Clean
 
+To Delete the M4DApplication:
