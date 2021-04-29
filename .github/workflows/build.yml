@@ -32,7 +32,7 @@ jobs:
 
         
     - name: Build docker image 
-      run: make docker-build
+      run: docker build -t ghcr.io/mohammad-nassar10/hello-world-read-module:${{ matrix.TAG }} -f Dockerfile
     - name: Docker login
       if: ${{ github.event_name != 'pull_request' }}
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u "${{ github.actor }}" --password-stdin "${{ env.DOCKER_HOSTNAME }}"
