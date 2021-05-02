@@ -42,9 +42,9 @@ jobs:
     - id: version
       name: Infer version
       run: echo ::set-output name=version::${GITHUB_REF#refs/*/}
-    - name: Retag image for tag
-      if: contains(github.ref, 'tags')
-      run: docker tag ghcr.io/mohammad-nassar10/hello-world-read-module:${{ matrix.TAG }} ghcr.io/mohammad-nassar10/hello-world-read-module:${{ steps.version.outputs.version }}${{ matrix.RELEASE_TAG_SUFFIX }}
+   # - name: Retag image for tag
+    #  if: contains(github.ref, 'tags')
+     # run: docker tag ghcr.io/mohammad-nassar10/hello-world-read-module:${{ matrix.TAG }} ghcr.io/mohammad-nassar10/hello-world-read-module:${{ steps.version.outputs.version }}${{ matrix.RELEASE_TAG_SUFFIX }}
     - run: docker images
     - name: Push image for tag
       if: contains(github.ref, 'tags')
