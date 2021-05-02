@@ -52,7 +52,8 @@ jobs:
       #run: docker push ghcr.io/mohammad-nassar10/hello-world-read-module:${{ steps.version.outputs.version }}${{ matrix.RELEASE_TAG_SUFFIX }}
         
     - name: Build helm chart 
-      run: make helm-verify
+      #run: make helm-verify
+      run: helm install rel1-hello-world-read-module hello-world-read-module
     - name: Helm login
       if: ${{ github.event_name != 'pull_request' }}
       run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login -u "${{ github.actor }}" --password-stdin "${{ env.DOCKER_HOSTNAME }}"
@@ -60,3 +61,5 @@ jobs:
       if: ${{ (github.event_name != 'pull_request') && !contains(github.ref, 'tags') }}
       #run: helm chart save hello-world-read-module ghcr.io/mohammad-nassar10/hello-world-read-module-chart:${{ matrix.TAG }} && helm chart push ghcr.io/mohammad-nassar10/hello-world-read-module-chart:${{ matrix.TAG }} && helm chart remove ghcr.io/mohammad-nassar10/hello-world-read-module-chart:${{ matrix.TAG }}
       run: make helm-chart-push
+    - name: Helm uninstall
+      run: make helm-uninstall
