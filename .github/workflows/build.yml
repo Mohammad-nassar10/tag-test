@@ -3,12 +3,12 @@ name: Build
 on:
   push:
     branches:
-      - manager
+      - main
     tags:
       - '*'
   pull_request:
     branches:
-      - manager
+      - main
 
 env:
   DOCKER_HOSTNAME: ghcr.io
