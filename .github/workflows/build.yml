@@ -56,7 +56,7 @@ jobs:
      # run: helm install rel1-hello-world-read-module hello-world-read-module
     - name: Helm login
       if: ${{ github.event_name != 'pull_request' }}
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login -u "${{ github.actor }}" --password-stdin "${{ env.DOCKER_HOSTNAME }}"
+      run: export HELM_EXPERIMENTAL_OCI=1 && echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login -u "${{ github.actor }}" --password-stdin "${{ env.DOCKER_HOSTNAME }}"
     - name: Helm chart push
       if: ${{ (github.event_name != 'pull_request') && !contains(github.ref, 'tags') }}
       #run: helm chart save hello-world-read-module ghcr.io/mohammad-nassar10/hello-world-read-module-chart:${{ matrix.TAG }} && helm chart push ghcr.io/mohammad-nassar10/hello-world-read-module-chart:${{ matrix.TAG }} && helm chart remove ghcr.io/mohammad-nassar10/hello-world-read-module-chart:${{ matrix.TAG }}
